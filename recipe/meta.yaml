@@ -7,13 +7,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/LunarCalendar-ext-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/LunarCalendar-ext-{{ version }}.tar.gz
   sha256: e9afee2869e131b8a0c1d23dc067232b78c52f97dcf3d00b239eea867d398d2c
   patches:
     - 0001-add-version-var.patch
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - lunar-find=lunarcalendar.command:find
@@ -22,10 +22,10 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
     - ephem >=3.7.5.3
-    - python >=3.7
+    - python >={{ python_min }}
     - python-dateutil >=2.6.1
     - pytz
 
@@ -42,6 +42,7 @@ test:
   requires:
     - pip
     - pytest
+    - python {{ python_min }}
 
 about:
   home: https://github.com/KaixuYang/LunarCalendar-extension
